@@ -6,6 +6,8 @@ const Menu = ({ book,onUpdateShelf}) => {
  
   const handleUpdateBookSelf =(e)=>{
     const values = e.target.value;
+    console.log(values)
+    console.log(book)
     onUpdateShelf(book,values)
   }
  

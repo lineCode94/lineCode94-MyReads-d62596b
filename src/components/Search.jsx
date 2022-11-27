@@ -9,7 +9,7 @@ const Search = ({   allBooks ,onUpdateShelf }) => {
 const [searchResults,setSearchResults] = useState([])
 // console.log(searchResults)
   //TODO search handeler
-  const searchBooks = (query, booksOnShelf) => {
+  const searchBooks = (query, booksOnShelf ) => {
     search(query, 20)
     
       .then((books) => {
@@ -23,8 +23,10 @@ const [searchResults,setSearchResults] = useState([])
             });
           });
            
+        
 
             setSearchResults(books);
+          
           
         } else {
           console.log(2)
@@ -37,10 +39,7 @@ const [searchResults,setSearchResults] = useState([])
       });
  
   };
-  if(query){
-    searchBooks(query,allBooks)
-
-  } 
+ 
 // useEffect(()=>{
 //   const addNewBooks = async()=>{
 //     if(query){
@@ -60,11 +59,11 @@ const [searchResults,setSearchResults] = useState([])
   //   updateQuery("")
   // }
  
-  const showBooks = searchResults === [] && query === ''  ? <p style={{fontSize:"30px",color:"#fff"}}>  No Books to Show👀!</p>:  ( 
+  const showBooks = searchResults === [] || query === ''  ? <p style={{fontSize:"30px",color:"#fff"}}>  No Books to Show👀!</p>:  ( 
  
      searchResults.map((book)=>(
       
-     <Book   key={book.id}   book={book}/>
+     <Book  onUpdateShelf={onUpdateShelf}  key={book.id}   book={book}/>
         
    
   )))
@@ -81,8 +80,11 @@ const [searchResults,setSearchResults] = useState([])
       <div className="search-books-input-wrapper">
         <input
         value={query}
-        onChange={(e)=>updateQuery(e.target.value)}
+        onChange={(e)=>{updateQuery(e.target.value)
+          searchBooks(e.target.value, allBooks)}
+        }
           type="text"
+          
           placeholder="Search by title, author, or ISBN"
         />
       </div>

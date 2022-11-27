@@ -3,7 +3,7 @@ import { useState ,useEffect} from "react";
 import Search from "./components/Search";
 import Shelf from "./components/Shelf";
 import *as BookAPI from "./BooksAPI"
-import {Routes,Route} from 'react-router-dom'
+import {Routes,Route, Link} from 'react-router-dom'
 
 function App() {
   // const [showSearchPage, setShowSearchpage] = useState(false);
@@ -67,13 +67,19 @@ const update = async () => {
 
   return (
     <div  className="app">
+    
    <Routes>
       
      
         
         <Route exact path='/' element={
         <div className="list-books">
-         
+              <div className="list-books-title">
+          <h1>MyReads</h1>
+          <Link className="nav-links" to='/'>📚My Books </Link>
+          <Link className="nav-links"to='/search'>🔍Search </Link>
+          
+        </div>
           <Shelf shelf="currentlyReading"  shelfTitle="Currently Reading" allBooks={allBooks} onUpdateShelf={onUpdateShelf}/>
        <Shelf shelf="wantToRead" shelfTitle="Want To Read"  allBooks={allBooks} onUpdateShelf={onUpdateShelf}/>
        <Shelf shelf="read" shelfTitle="Read"  allBooks={allBooks} onUpdateShelf={onUpdateShelf}/>
